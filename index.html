@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Maria Claudia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Barra Superior Fixa (Instrução + Progresso + Tema) -->
+    <div id="barra-topo-hud">
+        <div id="instrucao">Role a página ou use as setas ← ↑ ↓ → para mover no mapa!</div>
+        <div class="hud-direita">
+            <div id="hud-progresso">Progresso: <span id="porcentagem">0</span>%</div>
+            <button type="button" id="btn-tema" aria-label="Alternar modo claro e escuro">🌙 NOITE</button>
+        </div>
+    </div>
+
+    <!-- Cenário animado de fundo: céu, sol/lua, nuvens, floresta e folhas caindo -->
+    <canvas id="canvas-cenario" aria-hidden="true"></canvas>
+
+    <!-- Tela Inicial Estilo Jogo Retro -->
+    <header id="tela-inicial">
+        <div class="grelha-retro"></div>
+
+        <div class="moldura-titulo">
+            <span class="subtitulo-topo">MARIA CLAUDIA • PORTFOLIO</span>
+            <h1 class="titulo-welcome">WELCOME</h1>
+
+            <div class="botoes-menu">
+                <button type="button" id="btn-menu" class="btn-pill btn-amarelo">MENU</button>
+                <button type="button" id="btn-start" class="btn-pill btn-azul">START</button>
+                <button type="button" id="btn-exit" class="btn-pill btn-amarelo">EXIT</button>
+            </div>
+
+            <div class="barra-hud-titulo">
+                <div class="hud-coracoes">♥ ♥ ♥ ♥ ♥</div>
+                <div class="hud-diamantes">♦ ♦ ♦ ♦ ♦</div>
+            </div>
+        </div>
+
+        <!-- Seletor de 3 Personagens (aparece ao clicar em START) -->
+        <div id="seletor-personagens" class="seletor-oculto">
+            <h2>Escolha seu personagem</h2>
+            <p>O personagem escolhido vai andar no mapa durante a rolagem.</p>
+
+            <div class="grade-personagens">
+                <button type="button" class="card-personagem selecionado" data-personagem="0">
+                    <canvas class="preview-personagem" width="96" height="96"></canvas>
+                    <span>Maga Pixel</span>
+                </button>
+
+                <button type="button" class="card-personagem" data-personagem="1">
+                    <canvas class="preview-personagem" width="96" height="96"></canvas>
+                    <span>Maria</span>
+                </button>
+
+                <button type="button" class="card-personagem" data-personagem="2">
+                    <canvas class="preview-personagem" width="96" height="96"></canvas>
+                    <span>Gran Mago</span>
+                </button>
+            </div>
+
+            <button type="button" id="btn-confirmar-personagem" class="btn-acao">Entrar no Mapa</button>
+        </div>
+
+        <!-- Menu rápido de navegação -->
+        <nav id="menu-rapido" class="menu-oculto" aria-label="Atalhos das fases">
+            <a href="#fase-1">Fase 1: Início</a>
+            <a href="#fase-2">Fase 2: Habilidades</a>
+            <a href="#fase-3">Fase 3: Projetos</a>
+            <a href="#fase-4">Fase 4: Curiosidades</a>
+            <a href="#fase-5">Fase 5: Links</a>
+            <a href="#fase-6">Fase 6: Sobre Mim</a>
+        </nav>
+    </header>
+
+    <!-- Personagem ativo no mapa -->
+    <div id="personagem">
+        <canvas id="canvas-boneca" width="96" height="96"></canvas>
+    </div>
+
+    <!-- Conteúdo / Fases do site -->
+    <main id="mapa-fases">
+        <section class="fase" id="fase-1">
+            <div class="conteudo-caixa">
+                <h2>Olá, eu sou a Maria!</h2>
+                <p>Bem-vindo ao meu portfólio interativo. Role para baixo ou use as setas para avançar pelo mapa.</p>
+                <p>Aqui você irá descobrir algumas coisas sobre mim, meus projetos e ter uma pequena experiência no site.</p>
+                <p>Espero que goste!</p>
+            </div>
+        </section>
+
+        <section class="fase" id="fase-2">
+            <div class="conteudo-caixa">
+                <h2>Habilidades &amp; Techs</h2>
+                <p>Desenvolvedora focada em criar interfaces interativas na web e soluções bem estruturadas em dados. Trabalho com HTML5, CSS3, JavaScript e MySQL para modelagem e consultas SQL de diferentes níveis. Meu objetivo é unir criatividade visual e boa lógica de programação em cada projeto.</p>
+            </div>
+        </section>
+
+        <section class="fase" id="fase-3">
+            <div class="conteudo-caixa">
+                <h2>Projetos em Destaque</h2>
+                <p>Explore alguns dos projetos interativos e outros que já desenvolvi e estou desenvolvendo.</p>
+
+                <button type="button" id="btn-ver-projetos" class="btn-acao" aria-expanded="false" aria-controls="lista-projetos">
+                    VER PROJETOS
+                </button>
+
+                <div id="lista-projetos" class="lista-projetos oculta">
+                    <article class="card-projeto">
+                        <h3>Portfólio Retro Adventure</h3>
+                        <p>Site interativo com rolagem em fases, HUD pixel art, modo claro/escuro e seleção de personagens em canvas.</p>
+                        <span class="tags-projeto">HTML5 • CSS3 • JavaScript</span>
+                    </article>
+
+                    <article class="card-projeto">
+                        <h3>Sistema de Banco de Dados MySQL</h3>
+                        <p>Modelagem relacional e consultas organizadas por nível de complexidade (básicas, intermediárias e avançadas).</p>
+                        <span class="tags-projeto">MySQL • SQL • Modelagem Relacional</span>
+                    </article>
+
+                    <article class="card-projeto">
+                        <h3>Mini Jogo de Exploração</h3>
+                        <p>Experiência web focada em movimentação fluida, partículas brilhantes e transições suaves.</p>
+                        <span class="tags-projeto">Game Feel • Animação</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="fase" id="fase-4">
+            <div class="conteudo-caixa">
+                <h2>Curiosidades e Hobbies</h2>
+                <p>Sou apaixonada por música, tempos chuvosos, cinema e datas comemorativas como Halloween e Natal.</p>
+                <p>Meus hobbies variam entre coisas artesanais como desenhos, escrever poemas e colagens. Também jogo e leio alguns livros de gêneros como true crime, distopia e fantasia.</p>
+            </div>
+        </section>
+
+        <section class="fase" id="fase-5">
+            <div class="conteudo-caixa">
+                <h2>Acesso a Links</h2>
+                <p>Acesse meus repositórios, perfis e páginas externas diretamente por aqui.</p>
+
+                <div class="grade-links">
+                    <a href="https://github.com/mariaclaudiabento15-cpu" target="_blank" rel="noopener noreferrer" class="card-link">
+                        <span class="icone-link">👾</span>
+                        <div>
+                            <strong>GitHub</strong>
+                            <small>Códigos, portfólio e scripts</small>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/maria-claudia-bento-7a57242b1/" target="_blank" rel="noopener noreferrer" class="card-link">
+                        <span class="icone-link">💼</span>
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <small>Experiência e conexões</small>
+                        </div>
+                    </a>
+
+                    <a href="#fase-3" class="card-link">
+                        <span class="icone-link">🗄️</span>
+                        <div>
+                            <strong>Projetos &amp; MySQL</strong>
+                            <small>Ver projetos em destaque</small>
+                        </div>
+                    </a>
+                </div>
+
+                <button type="button" id="btn-copiar-link" class="btn-acao btn-copiar-link">
+                    COPIAR LINK DO SITE
+                </button>
+                <p id="feedback-link" class="feedback-link" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <!-- Fase 6: Perfil Estilo Blog com Foto Circular e Bio -->
+        <section class="fase" id="fase-6">
+            <div class="conteudo-caixa perfil-blog">
+                <div class="foto-bolinha">
+                    <img src="img/minha-foto.jpg.jpeg" alt="Foto da Maria">
+                </div>
+                <div class="info-blog">
+                    <span class="tag-blog">SOBRE MIM</span>
+                    <h2>Maria Claudia</h2>
+                    <p>Olá! Tenho 20 anos e sou apaixonada por tecnologia, design criativo e desenvolvimento web. Adoro transformar ideias em experiências interativas e divertidas na tela.</p>
+                    <p>Aqui compartilho meus projetos, estudos de programação e um pouco do meu dia a dia no mundo dev.</p>
+                    <button type="button" class="btn-acao" id="btn-abrir-form">Enviar Mensagem</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Questionário / Modal de Contato -->
+    <div id="modal-contato" class="modal-overlay" aria-hidden="true">
+        <div class="modal-caixa">
+            <button type="button" id="btn-fechar-form" class="btn-fechar" aria-label="Fechar questionário">&times;</button>
+            <h2>Mande uma Mensagem</h2>
+            <p class="modal-subtitulo">Preencha os campos abaixo para falar comigo:</p>
+
+            <form id="form-mensagem">
+                <div class="campo-form">
+                    <label for="nome">Seu nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Joãozinho Silva" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="email">Seu e-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="assunto">O que você procura?</label>
+                    <select id="assunto" name="assunto">
+                        <option value="Projeto / Freelance">Projeto / Freelance</option>
+                        <option value="Parceria / Ideia">Parceria / Ideia</option>
+                        <option value="Apenas um oi">Apenas dizer oi</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="mensagem">Sua mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-acao btn-enviar-form">Enviar Agora</button>
+            </form>
+
+            <div id="feedback-envio" class="feedback-envio"></div>
+        </div>
+    </div>
+
+    <!-- Pista / Chão onde o personagem anda -->
+    <div id="chao-jogo"></div>
+
+    <canvas id="canvas-brilho"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
